@@ -1,27 +1,13 @@
-// console.log(__dirname);
-
-// const path = require('path');
-// console.log(path);
-
-
-console.log('hello world!');
-var x = 1;
-console.log(`x = ${x + 1}`)
-
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-const person = {name: 'Dany', age: 19}
-let {name, age} = person;
-console.log(name, age);
+console.log(__dirname);
+// console.log(module);
+const path = require('path');
+console.log(path.join(__dirname, 'myfile.txt'));
 
 
+const os = require('os');
+console.log(`free memory is =>${os.freemem()}`);
+console.log(`total memory is =>${os.totalmem}`);
 
-readline.question('Who are you?', x => {
-
-  x = parseInt(x) + 1;
-  console.log(`Hey there ${x}!`);
-  readline.close();
-});
+const fs = require('fs')
+const files = fs.readdirSync('./')
+console.log(files);
