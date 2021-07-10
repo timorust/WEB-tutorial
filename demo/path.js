@@ -1,6 +1,0 @@
-const path = require('path')
-console.log('file name is =>', path.basename(__filename))
-console.log('Folder name is =>', path.dirname(__filename))
-console.log('exename is =>', path.extname(__filename))
-console.log('parse is =>', path.parse(__filename).name)
-console.log(path.join(__dirname, 'server', 'index.html'))
