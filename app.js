@@ -1,14 +1,20 @@
 
 const logger = require('./logger');
-console.log(`import require:`)
-console.log(logger)
-
-console.log(`end point require is =>${logger.end_point}`)
+const calc = require('./calc');
+const fs = require('fs')
 
 logger.log('===== system start up')
 
-const fs = require('fs')
-const files = fs.readdirSync('./') // sync -- bad!!!!
+console.log(calc.add(3, 4))
+logger.logResult('result for this func is =>12')
+
+
+console.log(`import require:`)
+console.log(logger)
+console.log(`end point require is =>${logger.end_point}`)
+
+
+const files = fs.readdirSync('./')
 console.log('[sync] ' + files)
 
 fs.readdir('$', (err, files) => {
