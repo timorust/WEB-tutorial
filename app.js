@@ -1,54 +1,30 @@
+const fs = require('fs');
+const path = require('path');
 
 const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-   
-  
-  readline.question('Enter file name?', fileName => {
-    console.log(`You file name is => ${fileName}!`);
-    readline.close();
+  input: process.stdin,
+  output: process.stdout
+});
+// const files = fs.readdirSync('./');
+// console.log('[sync] files is =>' + files)
+// console.log(files.find(item => item.toUpperCase() == 'app.js'.toUpperCase()))
 
-    const fs = require('fs')
-    fs.readdir(__dirname, (err, files) => {
-  if (err)
-    console.log(err);
-  else {
-    console.log("\nCurrent directory filenames is =>", files);
-    
-    files.forEach(file => {
-      if(fileName === file)
-      console.log('The file found is =>',fileName);
-    })
-  }
+readline.question('Which file you want to search (full-name)? ', file_name => {
+  console.log(`Searching is =>${file_name}!`);
+  readline.close();
+
+  fs.readdir(__dirname, (err, files) => {
+    if (err) {
+      console.log(`Erorr ${err}`)
+    }
+    else {
+      console.log(`[sync] file is =>${files}`)
+    }
+    if (files.find(item => item.toUpperCase() == file_name.toUpperCase())) {
+      console.log(`file name is =>${file_name} exist in =>${__dirname} folder`)
+    }
+    else {
+      console.log(`file name is =>${file_name} NOT exist in =>${__dirname} folder`)
+    }
+  })
 })
-
-  });
-
-
-
-
-
-
-
-// display all module data
-// console.log(module);
-
-// console.log(__dirname);
-// const path = require('path')
-// console.log(path.join(__dirname, 'myfile.txt'))
-
-// const os = require('os');
-// console.log(`Free Memory: ${os.freemem()}`)
-// console.log(`Total  Memory: ${os.totalmem()}`)
-
-// const fs = require('fs')
-// const files = fs.readdirSync('./') // sync -- bad!!!!
-// console.log('[sync] ' + files)
-
-// fs.readdir(__dirname, (err, files) => {
-//     if (err) 
-//        console.log(`[async] Error ${err}`)
-//     else 
-//        console.log(`[async] Files ${files}`)
-//  })
