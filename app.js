@@ -5,8 +5,8 @@ const fs = require('fs')
 
 logger.log('===== system start up')
 
-console.log(calc.add(3, 4))
-logger.logResult('result for this func is =>12')
+result = calc.add(3, 4)
+logger.logResult(`result of calc.add 3 + 4 => ${result}`)
 
 
 console.log(`import require:`)
