@@ -1,27 +1,44 @@
 
-const logger = require('./logger');
-const calc = require('./calc');
-const fs = require('fs')
+const EventEmitter = require('events');
+const uppercase_emitter = new EventEmitter;
+const lowercase_emitter = new EventEmitter;
 
-logger.log('===== system start up')
+uppercase_emitter.on('trying_to_divide_by_zero', (_) => {
+  // event-handler => what to do event was triggered?
+  // do whatever you want
+  console.error(`CANNOT DIVIDE ${_} BY ZERO!`);
+})
 
-result = calc.add(3, 4)
-logger.logResult(`result of calc.add 3 + 4 => ${result}`)
+lowercase_emitter.on('trying_to_divide_by_zero', (_) => {
+  // event-handler => what to do event was triggered?
+  // do whatever you want
+  console.error(`cannot divide ${_} by zero!`);
+})
 
 
-console.log(`import require:`)
-console.log(logger)
-console.log(`end point require is =>${logger.end_point}`)
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+   
 
+  let x,y = 0;
+  readline.question('Enter 1st number ?', _x => {
+      x = _x;
 
-const files = fs.readdirSync('./')
-console.log('[sync] ' + files)
+      readline.question('Enter 2nd number ?', _y => {
+        y = _y;
+        if(y == 0 || x == 0) {
+          uppercase_emitter.emit('trying_to_divide_by_zero', x)
+          lowercase_emitter.emit('trying_to_divide_by_zero', y)
+        }
+        else {
+          const result = x * y;
+          console.log(`${x} * ${y} => ${result}`)
+        }
+        readline.close();
+      });
+  });
 
-fs.readdir('$', (err, files) => {
-    if (err) 
-       logger.log('ERROR in fs.readdir of folder $: ' + err)
-    else 
-       console.log(`[async] Files ${files}`)
- })
+ 
 
-logger.log('====== system shut down')
