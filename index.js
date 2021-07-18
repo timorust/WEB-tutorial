@@ -48,13 +48,9 @@ app.get('/add', (req, resp) => {
   resp.end(`${req.query.a} + ${req.query.b} = ${Number(req.query.a) + Number(req.query.b)}`)
 })
 
+app.get('/customer/:cust_id', (req, resp) => {
+  resp.writeHead(200);
+  resp.end(`you sent is => ${req.params.cust_id}`)
+})
+
 app.listen(port, () => console.log(`Listening to port ${port}`))
-
-// const requestListenet = (req, res) => {
-//   console.log(req);
-//   res.writeHead(200);
-//   res.end("hello world");
-// }
-
-// const server = http.createServer(requestListenet);
-// server.listen(8080);
